@@ -11,9 +11,11 @@ def genConverter(angka, pembilang):
             sisa = angka % pembilang
             angka = angka // pembilang
             if sisa > 9:
+                hasilAngka += str(sisa)
                 sisa = "{0} = {1}".format(sisa, libChar(sisa))
+            else:
+                hasilAngka += str(sisa)
             divid = "{0}------  {1}".format(pembilang, sisa)
-            hasilAngka += str(sisa)
             result.append(divid)
         else:
             if angka > 9:
@@ -45,7 +47,6 @@ def libChar(angka):
         return "G"
 
 angka = int(input("Masukkan bilangan untuk dikonversi : "))
-output = []
 
 biner, hasilBiner = genConverter(angka, 2)
 octal, hasilOctal = genConverter(angka, 8)
