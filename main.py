@@ -3,48 +3,54 @@ import itertools as it
 
 def genConverter(angka, pembilang):
     result = []
+    hasilAngka = ""
     loop = True
     while loop:
-        if angka > pembilang:
+        if angka >= pembilang:
             result.append(angka)
             sisa = angka % pembilang
             angka = angka // pembilang
             if sisa > 9:
-                sisa = libChar(sisa)
+                sisa = "{0} = {1}".format(sisa, libChar(sisa))
             divid = "{0}------  {1}".format(pembilang, sisa)
+            hasilAngka += str(sisa)
             result.append(divid)
         else:
             if angka > 9:
                 angka = libChar(angka)
+            hasilAngka += str(angka)
             result.append(angka)
             loop = False
             break
         result.append("")
     
-    return result
+    hasilAngka = "".join(reversed(hasilAngka)) #reversed
+
+    return (result, hasilAngka)
 
 def libChar(angka):
     if angka == 10:
-        return "10 = A"
+        return "A"
     elif angka == 11:
-        return "11 = B"
+        return "B"
     elif angka == 12:
-        return "12 = C"
+        return "C"
     elif angka == 13:
-        return "13 = D"
+        return "D"
     elif angka == 14:
-        return "14 = E"
+        return "E"
     elif angka == 15:
-        return "15 = F"
+        return "F"
     elif angka == 16:
-        return "16 = G"
+        return "G"
 
 angka = int(input("Masukkan bilangan untuk dikonversi : "))
 output = []
 
-biner = genConverter(angka, 2)
-octal = genConverter(angka, 8)
-hexa = genConverter(angka, 16)
+biner, hasilBiner = genConverter(angka, 2)
+octal, hasilOctal = genConverter(angka, 8)
+hexa, hasilHexa = genConverter(angka, 16)
+
 
 
 combine = list(it.zip_longest(biner, octal, hexa))
@@ -53,4 +59,8 @@ combine = list(it.zip_longest(biner, octal, hexa))
 header = ("Binner", "Octal", "Hexadecimal")
 
 print(tabulate(combine, header, tablefmt="plain"))
-
+print("")
+print("==============================================================")
+print("Binner : ", hasilBiner)
+print("Octal  : ", hasilOctal)
+print("Hexa   : ", hasilHexa)
