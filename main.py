@@ -11,8 +11,9 @@ def genConverter(angka, pembilang):
             sisa = angka % pembilang
             angka = angka // pembilang
             if sisa > 9:
-                hasilAngka += str(sisa)
-                sisa = "{0} = {1}".format(sisa, libChar(sisa))
+                huruf = libChar(sisa)
+                hasilAngka += huruf
+                sisa = "{0} = {1}".format(sisa, huruf)
             else:
                 hasilAngka += str(sisa)
             divid = "{0}------  {1}".format(pembilang, sisa)
